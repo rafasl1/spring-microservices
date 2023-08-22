@@ -2,31 +2,23 @@ package br.com.rafasl1.hrpayroll.domain.services;
 
 import br.com.rafasl1.hrpayroll.domain.entities.Payment;
 import br.com.rafasl1.hrpayroll.domain.entities.Worker;
+import br.com.rafasl1.hrpayroll.domain.entities.WorkerClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import rx.Scheduler;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class PaymentService {
 
-    @Value("${hr-worker.host}")
-    private String workerHost;
+    private WorkerClient workerClient;
 
     @Autowired
-    private RestTemplate restTemplate;
+    public PaymentService(WorkerClient workerClient) {
+        this.workerClient = workerClient;
+    }
 
     public Payment getPayment(long workerId, int days) {
-        Map<String, String> uriVariables = new HashMap<>();
-        uriVariables.put("id", String.valueOf(workerId));
-
-        String resourceHost = workerHost + "/workers/{id}";
-        Worker worker = restTemplate.getForObject(resourceHost, Worker.class, uriVariables);
-
+        Worker worker = workerClient.getWorker(workerId, days);
         return new Payment(worker.getName(), worker.getDailyIncome(), days);
     }
 
