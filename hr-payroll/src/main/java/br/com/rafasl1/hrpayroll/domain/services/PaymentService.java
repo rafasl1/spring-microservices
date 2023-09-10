@@ -2,8 +2,7 @@ package br.com.rafasl1.hrpayroll.domain.services;
 
 import br.com.rafasl1.hrpayroll.domain.entities.Payment;
 import br.com.rafasl1.hrpayroll.domain.entities.Worker;
-import br.com.rafasl1.hrpayroll.domain.entities.WorkerClient;
-import br.com.rafasl1.hrpayroll.feignclients.WorkerFeignClient;
+import br.com.rafasl1.hrpayroll.application.feignclients.WorkerFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

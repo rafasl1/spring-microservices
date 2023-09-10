@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
 public class WorkerRestClient implements WorkerClient {
 
     @Value("${hr-worker.host}")
