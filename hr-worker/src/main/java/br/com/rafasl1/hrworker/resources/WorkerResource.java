@@ -21,9 +21,6 @@ import java.util.List;
 @RequestMapping(value = "/workers")
 public class WorkerResource {
 
-    @Value("${test.config}")
-    private String testConfig;
-
     @Autowired
     private static final Logger logger = LoggerFactory.getLogger(WorkerResource.class);
     @Autowired
@@ -33,7 +30,6 @@ public class WorkerResource {
 
     @GetMapping(value = "/configs")
     public ResponseEntity<Void> getConfigs() {
-        logger.info("CONFIG = " + testConfig);
 
         return ResponseEntity.noContent().build();
     }
