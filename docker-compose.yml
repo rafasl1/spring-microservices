@@ -1,0 +1,36 @@
+version: '3'
+services:
+  hr-worker-pg12:
+    image: postgres:12-alpine
+    ports:
+      - "5432:5432"
+    networks:
+      - hr-net
+    environment:
+      POSTGRES_PASSWORD: "1234"
+    container_name: hr-worker-pg12
+
+  hr-user-pg12:
+    image: postgres:12-alpine
+    ports:
+      - "5433:5432"
+    networks:
+      - hr-net
+    environment:
+      POSTGRES_PASSWORD: "123456"
+    container_name: hr-user-pg12
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "email@email.com"
+      PGADMIN_DEFAULT_PASSWORD: "1234567"
+    networks:
+      - hr-net
+    container_name: hr-pgadmin-client
+
+networks:
+  hr-net:
+    driver: bridge
